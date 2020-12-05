@@ -155,10 +155,14 @@ def train_model(model, x, y=None,
                 tpu_activate=False,
                 filepath_logger=None,
                 filepath_model = None,
-                filepath_model_minloss = None):
+                filepath_model_minloss = None,
+                replace_logger=True):
 
     gc.collect()
     
+    if replace_logger:
+        os.remove(filepath_logger)
+
     model.compile(optimizer=optimizer, loss=loss, metrics=metrics)
 
     # If not fit with Generator
