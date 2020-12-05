@@ -1,8 +1,8 @@
 
 # Extractive Text Summarization using CNNs
-Project about NLP, use to summarize a paragraph.
+Project about NLP, use architecture convolutional neural network to summarize a paragraph.
 
-Overview on notebook at [here](https://github.com/huanhkv/Extractive-Paragraph-Summarization/blob/main/notebooks/Extractive_Paragraph_Summarization.ipynb).
+Overview on notebook at [here](notebooks/Extractive_Paragraph_Summarization.ipynb).
 
 ## DATA
 CNN/DaliyMail: 
@@ -17,7 +17,7 @@ download [here](https://drive.google.com/drive/folders/1s_TuNnStWxEp-1_F-wvLHyZE
 - tensorflow==2.1.0
 
 
-**Use conda:**
+##### Use conda:
 	```
 	git clone https://github.com/huanhkv/Extractive-Paragraph-Summarization.git
 	cd Extractive-Paragraph-Summarization
@@ -28,9 +28,12 @@ download [here](https://drive.google.com/drive/folders/1s_TuNnStWxEp-1_F-wvLHyZE
 ## Model
 This model with input is a paragraph that multi sentences. Maximum sentences in input is 25 sentences and the limit word is 80 each sentence
 
-input shape: (None, 25, 80)
+- **Input shape**: (None, 25, 80)
 
-**Pre-trained word vectors:** we use pre-trained word vectors [Global Vectors for Word Representation](https://nlp.stanford.edu/projects/glove/GloVe.6B100d) of Stanford with GloVe.6B.100d.txt. Quick download [here](https://drive.google.com/file/d/1MkaPqIFhrYVUot_x_8ks26GxxZxj4Gls/view?usp=sharing)
+- **Pre-trained word vectors:** we use pre-trained word vectors [Global Vectors for Word Representation](https://nlp.stanford.edu/projects/glove/GloVe.6B100d) of Stanford with GloVe.6B.100d.txt. Quick download [here](https://drive.google.com/file/d/1MkaPqIFhrYVUot_x_8ks26GxxZxj4Gls/view?usp=sharing)
+
+[![Architecture model](models/plot_model.png "Architecture model")](models/plot_model.png)
+
 
 ## Commands:
 
