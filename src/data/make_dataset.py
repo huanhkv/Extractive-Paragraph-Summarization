@@ -10,7 +10,7 @@ import re
 import gc
 import argparse
 
-def parse_arguments() -> argparse.Namespace:
+def parse_arguments():
     parser = argparse.ArgumentParser(description='Making the dataset.')
     parser.add_argument('--input_path', type=str, required=True, help='Path to input')
     parser.add_argument('--output_path', type=str, required=True, help='Path to output')

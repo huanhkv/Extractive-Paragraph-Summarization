@@ -17,7 +17,7 @@ from tensorflow.keras.models import load_model
 def parse_arguments():
     parser = argparse.ArgumentParser(description='Making the dataset.')
     parser.add_argument('--input_path', type=str, required=True, help='Path to input')
-    parser.add_argument('--output_path', type=str, required=True, help='Path to output')
+    parser.add_argument('--output_path', type=str, help='Path to output')
     parser.add_argument('--tokenizer_path', type=str, required=True, help='Path to input')
     parser.add_argument('--model_path', type=str, required=True, help='Path to model trained')
     parser.add_argument('--n_sentences', type=int, default=2, help='Path to model trained')
