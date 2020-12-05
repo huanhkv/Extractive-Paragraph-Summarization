@@ -18,19 +18,17 @@ download [here](https://drive.google.com/drive/folders/1s_TuNnStWxEp-1_F-wvLHyZE
 
 
 ##### Use conda:
-	```
 	git clone https://github.com/huanhkv/Extractive-Paragraph-Summarization.git
 	cd Extractive-Paragraph-Summarization
 	conda env create -f env.yml
 	conda activate nlp_ats
-	```
 
 ## Model
 This model with input is a paragraph that multi sentences. Maximum sentences in input is 25 sentences and the limit word is 80 each sentence
 
 - **Input shape**: (None, 25, 80)
 
-- **Pre-trained word vectors:** we use pre-trained word vectors [Global Vectors for Word Representation](https://nlp.stanford.edu/projects/glove/GloVe.6B100d) of Stanford with GloVe.6B.100d.txt. Quick download [here](https://drive.google.com/file/d/1MkaPqIFhrYVUot_x_8ks26GxxZxj4Gls/view?usp=sharing)
+- **Pre-trained word vectors:** we use pre-trained word vectors [Global Vectors for Word Representation](https://nlp.stanford.edu/projects/glove/) of Stanford with GloVe.6B.100d.txt. Quick download [here](https://drive.google.com/file/d/1MkaPqIFhrYVUot_x_8ks26GxxZxj4Gls/view?usp=sharing)
 
 [![Architecture model](models/plot_model.png "Architecture model")](models/plot_model.png)
 
@@ -49,6 +47,7 @@ This model with input is a paragraph that multi sentences. Maximum sentences in 
 		--maxlen_sentence 500 \
 		--maxlen_word 3000
 	```
+
 2. **Tokenizer data**
 	- input_path: path folder contain processed data (2 file: `processed_full.txt` and `processed_summ.txt`)
 	- output_path: path folder contain tokenized data (2 file: `x.npy` and `y.npy`)
@@ -59,6 +58,7 @@ This model with input is a paragraph that multi sentences. Maximum sentences in 
 		--output_path data/interim \
 		--save_tokenizer models/tokenizer.json
 	```
+	
 3. **Create and train model**
 	- train_folder: path folder contain tokenized training data (2 file: `x.npy` and `y.npy`)
 	- valid_folder: path folder contain tokenized validation data (2 file: `x.npy` and `y.npy`)
@@ -74,6 +74,7 @@ This model with input is a paragraph that multi sentences. Maximum sentences in 
 		--filepath_embedding models/glove.6B.100d.txt \
 		--output_model models/model_save.h5 
 	```
+
 4. **Predict**
 	- input_path: file path contain content to predict
 	- tokenizer_path: file path of tokenizer saved
@@ -84,3 +85,8 @@ This model with input is a paragraph that multi sentences. Maximum sentences in 
 		--tokenizer_path models/tokenizer.json \
 		--model_path models/model_trained.h5
 	```
+
+**Member:**
+- Hồ Khả Việt Huấn - 43.01.104.058
+- Nguyễn Văn Thịnh - 43.01.104.168
+- Lâm Phước Đạt - 43.01.104.015
