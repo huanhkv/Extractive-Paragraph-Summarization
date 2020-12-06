@@ -6,7 +6,7 @@ Overview on notebook at [here](notebooks/Extractive_Paragraph_Summarization.ipyn
 
 ## DATA
 CNN/DaliyMail: 
-download [here](https://drive.google.com/drive/folders/1s_TuNnStWxEp-1_F-wvLHyZE-CRVFOT2?usp=sharing)
+download [here](https://drive.google.com/drive/folders/1O9NyQjMZC3D5Cr4OzB6NdrLQpHSgGZD4?usp=sharing)
 
 ## Dependencies
 - python==3.7.9
