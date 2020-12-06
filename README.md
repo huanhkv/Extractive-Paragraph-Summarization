@@ -17,13 +17,15 @@ download [here](https://drive.google.com/drive/folders/1s_TuNnStWxEp-1_F-wvLHyZE
 - tensorflow==2.1.0
 
 
-##### Use conda:
-	git clone https://github.com/huanhkv/Extractive-Paragraph-Summarization.git
-	cd Extractive-Paragraph-Summarization
-	conda env create -f env.yml
-	conda activate nlp_ats
+**Use conda:**
+```
+git clone https://github.com/huanhkv/Extractive-Paragraph-Summarization.git
+cd Extractive-Paragraph-Summarization
+conda env create -f env.yml
+conda activate nlp_ats
+```
 
-## Commands:
+## Commands
 
 1. **Clean data**
 	- input_path: folder path contain input file (`full.txt` and `summ.txt`)
@@ -32,10 +34,16 @@ download [here](https://drive.google.com/drive/folders/1s_TuNnStWxEp-1_F-wvLHyZE
 	- maxlen_word: this is a number integer
 	```
 	python3 src/data/make_dataset.py \
-		--input_path data/raw \
-		--output_path data/processed \
-		--maxlen_sentence 500 \
-		--maxlen_word 3000
+		--input_path data/raw/CNNDM_data/train_mini \
+		--output_path data/processed/train_mini \
+		--maxlen_sentence 25 \
+		--maxlen_word 80
+
+	python3 src/data/make_dataset.py \
+		--input_path data/raw/CNNDM_data/valid \
+		--output_path data/processed/valid \
+		--maxlen_sentence 25 \
+		--maxlen_word 80
 	```
 
 2. **Tokenizer data**
@@ -44,9 +52,13 @@ download [here](https://drive.google.com/drive/folders/1s_TuNnStWxEp-1_F-wvLHyZE
 	- save_tokenizer: file path save tokenizer (json file)
 	```
 	python3 src/features/convert_data.py \
-		--input_path data/processed \
-		--output_path data/interim \
+		--input_path data/processed/valid \
+		--output_path data/interim/valid \
 		--save_tokenizer models/tokenizer.json
+
+	python3 src/features/convert_data.py \
+		--input_path data/processed/valid \
+		--output_path data/interim/valid \
 	```
 	
 3. **Create and train model**
@@ -88,7 +100,7 @@ This model with inputs is a paragraph that has multi-sentence. The maximum sente
 
 ---
 
-### Member:
+## Member
 - Hồ Khả Việt Huấn - 43.01.104.058
 - Nguyễn Văn Thịnh - 43.01.104.168
 - Lâm Phước Đạt - 43.01.104.015
