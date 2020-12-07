@@ -5,7 +5,8 @@ Project about NLP, use architecture convolutional neural network to summarize a 
 Overview on notebook at [here](notebooks/Extractive_Paragraph_Summarization.ipynb).
 
 ## DATA
-CNN/DaliyMail: 
+CNN/DaliyMail: 311940 samples and we split it to train-valid-test (90 - 5 - 5)
+
 download [here](https://drive.google.com/drive/folders/1O9NyQjMZC3D5Cr4OzB6NdrLQpHSgGZD4?usp=sharing)
 
 ## Dependencies
@@ -32,34 +33,35 @@ conda activate nlp_ats
 	- output_path: folder path contain output file (`processed_full.txt` and `processed_summ.txt`)
 	- maxlen_sentence: this is a number integer
 	- maxlen_word: this is a number integer
-	```
-	python3 src/data/make_dataset.py \
-		--input_path data/raw/CNNDM_data/train_mini \
-		--output_path data/processed/train_mini \
-		--maxlen_sentence 25 \
-		--maxlen_word 80
+```
+python src/data/make_dataset.py \
+	--input_path data/raw/CNNDM_data/train_mini \
+	--output_path data/processed/train_mini \
+	--maxlen_sentence 25 \
+	--maxlen_word 80
 
-	python3 src/data/make_dataset.py \
-		--input_path data/raw/CNNDM_data/valid \
-		--output_path data/processed/valid \
-		--maxlen_sentence 25 \
-		--maxlen_word 80
-	```
+python src/data/make_dataset.py \
+	--input_path data/raw/CNNDM_data/valid \
+	--output_path data/processed/valid \
+	--maxlen_sentence 25 \
+	--maxlen_word 80
+```
 
 2. **Tokenizer data**
 	- input_path: folder path contain processed data (2 file: `processed_full.txt` and `processed_summ.txt`)
 	- output_path: folder path contain tokenized data (2 file: `x.npy` and `y.npy`)
 	- save_tokenizer: file path save tokenizer (json file)
-	```
-	python3 src/features/convert_data.py \
-		--input_path data/processed/valid \
-		--output_path data/interim/valid \
-		--save_tokenizer models/tokenizer.json
+```
+python src/features/convert_data.py \
+	--input_path data/processed/train_mini \
+	--output_path data/interim/train_mini \
+	--save_tokenizer models/tokenizer.json
 
-	python3 src/features/convert_data.py \
-		--input_path data/processed/valid \
-		--output_path data/interim/valid \
-	```
+python src/features/convert_data.py \
+	--input_path data/processed/valid \
+	--output_path data/interim/valid \
+	--save_tokenizer models/tokenizer.json
+```
 	
 3. **Create and train model**
 	- train_folder: folder path contain tokenized training data (2 file: `x.npy` and `y.npy`)
@@ -68,26 +70,26 @@ conda activate nlp_ats
 	- path_tokenizer: file path of tokenizer saved
 	- filepath_embedding: file path pre-trained embedding ([download pre-trained](#model))
 	- output_model: file path to save model (file .h5)
-	```	
-	python3 src/models/train_model.py \
-		--train_folder data/interim \
-		--valid_folder data/interim \
-		--epochs 1 \
-		--path_tokenizer models/tokenizer.json \
-		--filepath_embedding models/glove.6B.100d.txt \
-		--output_model models/model_save.h5 
-	```
+```	
+python src/models/train_model.py \
+	--train_folder data/interim/train_mini \
+	--valid_folder data/interim/valid \
+	--epochs 1 \
+	--path_tokenizer models/tokenizer.json \
+	--filepath_embedding models/glove.6B.100d.txt \
+	--output_model models/model_save.h5 
+```
 
 4. **Predict**
 	- input_path: file path contain content to predict
 	- tokenizer_path: file path of tokenizer saved
 	- model_path: file path of model use to predict
-	```
-	python3 src/models/predict_model.py \
-		--input_path data/raw/demo_predict.txt \
-		--tokenizer_path models/tokenizer.json \
-		--model_path models/model_trained.h5
-	```
+```
+python src/models/predict_model.py \
+	--input_path data/raw/demo_predict.txt \
+	--tokenizer_path models/tokenizer.json \
+	--model_path models/model_trained.h5
+```
 
 ## Model
 This model with inputs is a paragraph that has multi-sentence. The maximum sentences for inputs is 25 and the limit for words is 80 for each sentence.
@@ -97,8 +99,6 @@ This model with inputs is a paragraph that has multi-sentence. The maximum sente
 - **Pre-trained word vectors:** we use pre-trained word vectors [Global Vectors for Word Representation](https://nlp.stanford.edu/projects/glove/) of Stanford with GloVe.6B.100d.txt. Quick download [here](https://drive.google.com/file/d/1MkaPqIFhrYVUot_x_8ks26GxxZxj4Gls/view?usp=sharing)
 
 [![Architecture model](models/plot_model.png "Architecture model")](models/plot_model.png)
-
----
 
 ## Member
 - Hồ Khả Việt Huấn - 43.01.104.058

@@ -86,6 +86,7 @@ def main():
     print('\n\nFull text:', txt[0])
     print('\n\nSummary:', pred_sort, result)
     
+    print()
     
 
 if __name__ == "__main__":
