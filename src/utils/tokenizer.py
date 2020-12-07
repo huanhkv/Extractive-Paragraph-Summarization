@@ -6,7 +6,7 @@ from tensorflow.keras.preprocessing.text import tokenizer_from_json
 
 
 def load_tokenizer(path):
-    print('Load tokenizer from json...')
+    print(f'Load tokenizer from {path}...')
     with open(path, "r") as f:
         token = tokenizer_from_json(f.read())
     return token

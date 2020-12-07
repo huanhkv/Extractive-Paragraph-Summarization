@@ -18,8 +18,9 @@ def parse_arguments():
     parser = argparse.ArgumentParser(description='Making the dataset.')
     parser.add_argument('--input_path', type=str, required=True, help='Path to input')
     parser.add_argument('--output_path', type=str, required=True, help='Path to output')
-    parser.add_argument('--save_tokenizer', type=str, required=True, help='Path to input')
-    parser.add_argument('--new_token', default=False, type=bool, help='Path to input')
+    parser.add_argument('--save_tokenizer', type=str, default=None, help='Path to input')
+    parser.add_argument('--new_token', type=bool, default=False, help='Path to input')
+    parser.add_argument('--size_vocab', type=int, default=30000, help='Path to input')
     
     return parser.parse_args()
 
@@ -29,9 +30,9 @@ def main():
     
     # Get processed data
     data = read_processed(args.input_path)
-    
+
     # Get tokenizer
-    token = create_tokenizer(data, args.save_tokenizer, args.new_token)
+    token = create_tokenizer(data, args.save_tokenizer, args.size_vocab, args.new_token)
     
     # Transform
     x = transform_tokenizer(token, data[0])
@@ -41,7 +42,8 @@ def main():
     
     # Save
     save_tokenized(args.output_path, x, y)
-
+    
+    print()
 
 if __name__ == "__main__":
     main()

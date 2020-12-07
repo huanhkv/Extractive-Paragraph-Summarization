@@ -67,6 +67,7 @@ def create_environment():
 
 
 def get_embedding_matrix(filepath, token):
+    print('Get embedding_matrix...')
     # Read from file to dict
     embedding_dict={}
     with open(filepath, 'r', encoding="utf8") as f:
@@ -81,7 +82,7 @@ def get_embedding_matrix(filepath, token):
     embedding_matrix=np.zeros((size_vocab + 2, 100))
     word_index = token.word_index
     
-    for word,i in tqdm(word_index.items()):
+    for word,i in word_index.items():
         if i > size_vocab + 1:
             continue
             
@@ -155,10 +156,14 @@ def train_model(model, x, y=None,
                 tpu_activate=False,
                 filepath_logger=None,
                 filepath_model = None,
-                filepath_model_minloss = None):
+                filepath_model_minloss = None,
+                replace_logger=True):
 
     gc.collect()
     
+    if replace_logger and os.path.exists(filepath_logger):
+        os.remove(filepath_logger)
+
     model.compile(optimizer=optimizer, loss=loss, metrics=metrics)
 
     # If not fit with Generator
@@ -175,13 +180,15 @@ def train_model(model, x, y=None,
         MAX_LOSS = 999999999
         min_loss_val = MAX_LOSS
 
+        list_metrics_return = ['loss'] + metrics
+
         for i in range(epochs):
             gc.collect()
             start = time.time()
             print(f'Epoch {i+1}/{epochs}:')
             
-            train_return = [0 for metric in model.metrics_names]
-            valid_return = [0 for metric in model.metrics_names]
+            train_return = [0 for metric in list_metrics_return]
+            valid_return = [0 for metric in list_metrics_return]
 
             # Train on training set
             for (x_batch, y_batch) in tqdm(x):
@@ -201,10 +208,10 @@ def train_model(model, x, y=None,
             
             print('\t',end='')
             # Show result on each epochs
-            for metric, value in zip(model.metrics_names, train_return):
+            for metric, value in zip(list_metrics_return, train_return):
                 print(f' - {metric}: {int(value*10000) / 10000}', end='')
                  
-            for metric, value in zip(model.metrics_names, valid_return):
+            for metric, value in zip(list_metrics_return, valid_return):
                 print(f' - {metric}_val: {int(value*10000) / 10000}', end='')
             print()
 
@@ -222,13 +229,13 @@ def train_model(model, x, y=None,
                 model.save(filepath_model)
 
             if filepath_logger:
-                # Check exist file log
+                # Check exists file log
                 if os.path.exists(filepath_logger):
                     log_csv = pd.read_csv(filepath_logger)
                 else:
                     print(f'\t - No such file or directory: {filepath_logger}. Create {filepath_logger}...')
-                    name_columns = [metric for metric in model.metrics_names]
-                    name_columns += [metric+'_val' for metric in model.metrics_names]
+                    name_columns = [metric for metric in list_metrics_return]
+                    name_columns += [metric+'_val' for metric in list_metrics_return]
                     log_csv = pd.DataFrame({col:[] for col in name_columns})
                 
                 new_row = train_return + valid_return
@@ -290,17 +297,25 @@ def main():
     
     embedding_matrix = get_embedding_matrix(args.filepath_embedding, token)
     
-    model = build_model(input_shape, output_units, size_vocab, embedding_matrix, dropout, image_model=False)
-    model.summary()
+    model = build_model(input_shape, output_units, 
+                        size_vocab, 
+                        embedding_matrix, 
+                        dropout, 
+                        image_model=False)
+    # model.summary()
     
+    # Train
     model = train_model(model, train_generator,
-                        optimizer='adam', loss='mse', metrics=['mse'],
+                        optimizer='adam', loss='mse', metrics=['mse', 'mae'],
                         epochs = args.epochs,
                         validation_data=valid_generator,
                         filepath_logger=args.filepath_logger,
                         tpu_activate=tpu_activate,
                         filepath_model=args.output_model,
                         filepath_model_minloss=args.filepath_model_minloss)
+
+    print()
+    
 
 if __name__ == "__main__":
     main()

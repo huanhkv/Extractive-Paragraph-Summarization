@@ -4,7 +4,7 @@ import numpy as np
 
 
 def read_from_txt(path):
-    print('Read data from txt...')
+    print(f'Read data from {path}...')
     gc.collect()
     with open(path, 'r', encoding="utf-8") as f:
         docs = f.read().split('\n')
@@ -12,7 +12,7 @@ def read_from_txt(path):
     
     
 def save_processed(processed_data, path):
-    print('Save processed data...')
+    print(f'Save processed data to {path}...')
     # Write full text to file
     with open(os.path.join(path, 'processed_full.txt'), 'w') as processed_full:
         # Join list to string
@@ -31,7 +31,7 @@ def save_processed(processed_data, path):
         
 
 def read_processed(path):
-    print('Read processed data...')
+    print(f'Read processed data from {path}...')
     with open(os.path.join(path, 'processed_full.txt')) as f:
         full = f.read().split('\n')
     
@@ -44,7 +44,7 @@ def read_processed(path):
 
 
 def save_tokenized(path, x, y):
-    print('Save tokenized data...')
+    print(f'Save tokenized data to {path}...')
     # Save x and y
     with open(os.path.join(path, 'x.npy'), 'wb') as f:
         np.save(f, np.array(x, dtype=object))
@@ -54,7 +54,7 @@ def save_tokenized(path, x, y):
 
 
 def read_tokenized(path):
-    print('Read tokenized data...')
+    print(f'Read tokenized data from {path}...')
     with open(os.path.join(path, 'x.npy'), 'rb') as f:
         x = np.load(f, allow_pickle=True)
 

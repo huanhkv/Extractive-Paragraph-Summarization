@@ -47,7 +47,6 @@ def processing_data(samples):
                     if 1<len(sentence.strip())] 
                 for sentences in full]
 
-    print()
     return full, summ
 
 
@@ -79,7 +78,8 @@ def main():
     
     # Save processed data
     save_processed(processed_data, args.output_path)
-
+    
+    print()
 
 if __name__ == "__main__":
     main()
