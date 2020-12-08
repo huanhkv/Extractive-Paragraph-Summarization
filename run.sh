@@ -1,8 +1,8 @@
 echo
 echo "**************************************** Read dataset ****************************************"
 python src/data/make_dataset.py \
-	--input_path data/raw/CNNDM_data/train_mini \
-	--output_path data/processed/train_mini \
+	--input_path data/raw/CNNDM_data/train \
+	--output_path data/processed/train \
 	--maxlen_sentence 25 \
 	--maxlen_word 80
 
@@ -15,8 +15,8 @@ echo
 
 echo "**************************************** Tokenizer dataset ****************************************"
 python src/features/convert_data.py \
-	--input_path data/processed/train_mini \
-	--output_path data/interim/train_mini \
+	--input_path data/processed/train \
+	--output_path data/interim/train \
 	--save_tokenizer models/tokenizer.json
 
 python src/features/convert_data.py \
@@ -27,7 +27,7 @@ echo
 
 echo "**************************************** Build and Run model ****************************************"
 python src/models/train_model.py \
-	--train_folder data/interim/train_mini \
+	--train_folder data/interim/train \
 	--valid_folder data/interim/valid \
 	--epochs 1 \
 	--path_tokenizer models/tokenizer.json \
