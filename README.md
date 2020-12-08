@@ -11,12 +11,12 @@ download [here](https://drive.google.com/drive/folders/1O9NyQjMZC3D5Cr4OzB6NdrLQ
 
 ## Dependencies
 - python==3.7.9
-- jupyter==1.0.0
-- numpy==1.19.2
+- numpy==1.18.5
 - pandas==1.1.3
 - tqdm==4.54.0
-- tensorflow==2.1.0
-
+- scikit-learn==0.23.2
+- tensorflow==2.3.1
+- notebook==6.1.5
 
 **Use conda:**
 ```
