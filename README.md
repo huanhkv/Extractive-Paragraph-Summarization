@@ -10,21 +10,13 @@ CNN/DaliyMail: 311940 samples and we split it to train-valid-test (90 - 5 - 5)
 download [here](https://drive.google.com/drive/folders/1O9NyQjMZC3D5Cr4OzB6NdrLQpHSgGZD4?usp=sharing)
 
 ## Dependencies
-- python==3.7.9
+- python==3.8
 - numpy==1.18.5
-- pandas==1.1.3
+- pandas==1.2.1
 - tqdm==4.54.0
-- scikit-learn==0.23.2
-- tensorflow==2.3.1
-- notebook==6.1.5
-
-**Use conda:**
-```
-git clone https://github.com/huanhkv/Extractive-Paragraph-Summarization.git
-cd Extractive-Paragraph-Summarization
-conda env create -f env.yml
-conda activate nlp_ats
-```
+- scikit-learn==0.24.1
+- tensorflow==2.4.1
+- notebook==6.2.0
 
 ## Commands
 
